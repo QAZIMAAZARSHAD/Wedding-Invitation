@@ -90,33 +90,23 @@ body::before {
 
 .pre{margin:0;color:var(--text-soft);letter-spacing:3px;text-transform:uppercase;font-size:16px;font-weight:600}
 .names{
-  font-family:'Playfair Display',serif;
-  font-size:64px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
   margin:20px 0 15px;
-  background: linear-gradient(135deg, #d4a574 0%, #c97b8a 50%, #d4a574 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height:1.4;
-  filter:drop-shadow(0 2px 8px rgba(212,165,116,0.4));
-  font-weight:700;
-  padding:5px 10px;
-  overflow:visible;
   position:relative;
   z-index:5;
 }
 .names .script{
   font-family:'Great Vibes',cursive;
   font-size:76px;
-  background: linear-gradient(135deg, #c97b8a 0%, #d4a574 50%, #c97b8a 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display:inline-block;
-  transform-origin:center center;
+  color:#c97b8a;
+  font-weight:400;
+  line-height:1.2;
+  text-align:center;
   animation:floatName 5s ease-in-out infinite;
-  filter:drop-shadow(0 3px 10px rgba(201,123,138,0.3));
-  padding:0 8px;
+  filter:drop-shadow(0 3px 10px rgba(201,123,138,0.4));
   position:relative;
   z-index:5;
   -webkit-font-smoothing:antialiased;
@@ -125,21 +115,18 @@ body::before {
 @keyframes floatName{0%{transform:translateY(0) scale(1)}50%{transform:translateY(-8px) scale(1.02)}100%{transform:translateY(0) scale(1)}}
 .amp{
   font-family:'Great Vibes', cursive;
-  font-size:48px;
-  color:#ff6b9d !important;
-  margin:0 16px;
-  display:inline-block;
-  vertical-align:middle;
+  font-size:42px;
+  color:#ff6b9d;
   font-weight:400;
   animation:gentlePulse 3s ease-in-out infinite;
   filter:drop-shadow(0 2px 8px rgba(255,107,157,0.4));
   position:relative;
   z-index:6;
-  opacity:1 !important;
+  margin:4px 0;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
-@keyframes gentlePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes gentlePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
 .when{margin:18px 0;color:var(--text-dark);font-weight:700;font-size:20px}
 .venue{margin:12px 0 24px;color:var(--text-soft);font-size:18px;font-weight:500}
 
@@ -314,9 +301,9 @@ body::before {
 
 /* responsiveness */
 @media (max-width:768px){
-  .names{font-size:48px !important;line-height:1.5 !important;padding:8px 12px !important}
-  .names .script{font-size:56px !important;padding:0 8px !important}
-  .amp{font-size:38px !important;margin:0 12px !important;opacity:1 !important}
+  .names{gap:6px !important}
+  .names .script{font-size:56px !important}
+  .amp{font-size:36px !important;margin:2px 0 !important}
   .pre{font-size:14px}
   .when{font-size:18px}
   .venue{font-size:16px}
@@ -357,9 +344,9 @@ body::before {
 
 @media (max-width:480px){
   .invite{margin-top:20px !important}
-  .names{font-size:38px !important;line-height:1.6 !important;padding:10px 15px !important}
-  .names .script{font-size:42px !important;padding:0 8px !important}
-  .amp{font-size:32px !important;margin:0 8px !important;opacity:1 !important}
+  .names{gap:4px !important}
+  .names .script{font-size:42px !important}
+  .amp{font-size:30px !important;margin:2px 0 !important}
   .pre{font-size:13px}
   .card{padding:28px 20px !important}
   .countdown{
