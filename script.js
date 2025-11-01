@@ -164,7 +164,7 @@
 
   // WhatsApp share
   document.getElementById('shareWhatsApp').addEventListener('click', ()=>{
-    const text = encodeURIComponent('You are invited 🎉\nLubna Khalid Weds Ahmad Syedain\n3rd Jan 2026 • 6:00 PM\nHotel Awadh International, Lucknow\nDetails: ' + ('https://tinyurl.com/LubnaWedsAhmed'));
+    const text = encodeURIComponent('You are invited 🎉\nLubna Khalid Weds Ahmad Syedain\n3rd Jan 2026 • 6:00 PM\nHotel Awadh International, Lucknow\nDetails: ' + ('https://tinyurl.com/LubnaWedsAhmad'));
     const wa = 'https://wa.me/?text=' + text;
     window.open(wa,'_blank');
   });
