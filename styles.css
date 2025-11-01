@@ -85,7 +85,7 @@ body::before {
 }
 
 /* shimmer overlay */
-.card::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg, rgba(255,215,230,0.0), rgba(255,255,255,0.6), rgba(255,215,230,0.0));transform:translateX(-100%);animation:shimmer 5s linear infinite}
+.card::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg, rgba(255,215,230,0.0), rgba(255,255,255,0.6), rgba(255,215,230,0.0));transform:translateX(-100%);animation:shimmer 5s linear infinite;z-index:1;border-radius:24px}
 @keyframes shimmer{to{transform:translateX(200%)}} 
 
 .pre{margin:0;color:var(--text-soft);letter-spacing:3px;text-transform:uppercase;font-size:16px;font-weight:600}
@@ -97,9 +97,13 @@ body::before {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  line-height:1.2;
+  line-height:1.4;
   filter:drop-shadow(0 2px 8px rgba(212,165,116,0.4));
   font-weight:700;
+  padding:5px 10px;
+  overflow:visible;
+  position:relative;
+  z-index:5;
 }
 .names .script{
   font-family:'Great Vibes',cursive;
@@ -112,20 +116,30 @@ body::before {
   transform-origin:center center;
   animation:floatName 5s ease-in-out infinite;
   filter:drop-shadow(0 3px 10px rgba(201,123,138,0.3));
+  padding:0 8px;
+  position:relative;
+  z-index:5;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
 }
 @keyframes floatName{0%{transform:translateY(0) scale(1)}50%{transform:translateY(-8px) scale(1.02)}100%{transform:translateY(0) scale(1)}}
 .amp{
   font-family:'Great Vibes', cursive;
   font-size:48px;
-  color:#ff6b9d;
+  color:#ff6b9d !important;
   margin:0 16px;
   display:inline-block;
   vertical-align:middle;
   font-weight:400;
   animation:gentlePulse 3s ease-in-out infinite;
   filter:drop-shadow(0 2px 8px rgba(255,107,157,0.4));
+  position:relative;
+  z-index:6;
+  opacity:1 !important;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
 }
-@keyframes gentlePulse{0%,100%{transform:scale(1);opacity:0.9}50%{transform:scale(1.08);opacity:1}}
+@keyframes gentlePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 .when{margin:18px 0;color:var(--text-dark);font-weight:700;font-size:20px}
 .venue{margin:12px 0 24px;color:var(--text-soft);font-size:18px;font-weight:500}
 
@@ -300,9 +314,9 @@ body::before {
 
 /* responsiveness */
 @media (max-width:768px){
-  .names{font-size:48px !important}
-  .names .script{font-size:56px !important}
-  .amp{font-size:38px !important;margin:0 12px !important}
+  .names{font-size:48px !important;line-height:1.5 !important;padding:8px 12px !important}
+  .names .script{font-size:56px !important;padding:0 8px !important}
+  .amp{font-size:38px !important;margin:0 12px !important;opacity:1 !important}
   .pre{font-size:14px}
   .when{font-size:18px}
   .venue{font-size:16px}
@@ -343,9 +357,9 @@ body::before {
 
 @media (max-width:480px){
   .invite{margin-top:20px !important}
-  .names{font-size:38px !important}
-  .names .script{font-size:42px !important}
-  .amp{font-size:32px !important;margin:0 8px !important}
+  .names{font-size:38px !important;line-height:1.6 !important;padding:10px 15px !important}
+  .names .script{font-size:42px !important;padding:0 8px !important}
+  .amp{font-size:32px !important;margin:0 8px !important;opacity:1 !important}
   .pre{font-size:13px}
   .card{padding:28px 20px !important}
   .countdown{
