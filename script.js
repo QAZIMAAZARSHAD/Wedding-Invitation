@@ -1,11 +1,3 @@
-/* Animated Night Sky Invite Script
- - Countdown
- - Fullscreen starfield + moving sparkles
- - Autoplay background music (attempt)
- - Download invite (placeholder)
- - WhatsApp share, Add to calendar
-*/
-
 (function(){
   // Countdown to Jan 3 2026 18:00 local time
   const target = new Date('2026-01-03T18:00:00');
@@ -172,7 +164,7 @@
 
   // WhatsApp share
   document.getElementById('shareWhatsApp').addEventListener('click', ()=>{
-    const text = encodeURIComponent('You are invited 🎉\nLubna Khalid & Ahmad Syedain\n3rd Jan 2026 • 6:00 PM\nHotel Awadh International, Lucknow\nDetails: ' + (window.location.href || 'https://lubna-ahmad.example'));
+    const text = encodeURIComponent('You are invited 🎉\nLubna Khalid Weds Ahmad Syedain\n3rd Jan 2026 • 6:00 PM\nHotel Awadh International, Lucknow\nDetails: ' + (window.location.href || 'https://lubna-ahmad.example'));
     const wa = 'https://wa.me/?text=' + text;
     window.open(wa,'_blank');
   });
