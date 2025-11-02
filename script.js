@@ -146,14 +146,25 @@
 
   // Aggressive autoplay background music
   const audio = document.getElementById('bgMusic');
+  let audioStarted = false;
   
   function playAudio(){
-    if(audio && audio.paused){
+    if(audio && audio.paused && !audioStarted){
       audio.volume = 0.16;
       audio.play().then(()=>{
         console.log('Audio playing automatically');
+        audioStarted = true;
+        // Remove pulse animation when playing
+        const musicBtn = document.getElementById('musicToggle');
+        if(musicBtn) musicBtn.style.animation = 'musicPulse 2s ease-in-out infinite';
       }).catch((error)=>{
         console.log('Autoplay blocked, waiting for user interaction:', error);
+        // Make button pulse more prominently to attract attention
+        const musicBtn = document.getElementById('musicToggle');
+        if(musicBtn){
+          musicBtn.style.animation = 'musicPulseStrong 1s ease-in-out infinite';
+          musicBtn.title = '🎵 Click to play music';
+        }
       });
     }
   }
@@ -161,18 +172,23 @@
   // Try to play immediately
   playAudio();
   
-  // Try again after a short delay
+  // Try again after short delays
   setTimeout(playAudio, 100);
   setTimeout(playAudio, 500);
+  setTimeout(playAudio, 1000);
   
-  // Try on any user interaction
-  const events = ['click', 'touchstart', 'keydown', 'scroll', 'mousemove'];
+  // Try on any user interaction - most aggressive approach
+  const events = ['click', 'touchstart', 'touchend', 'keydown', 'scroll', 'mousemove', 'mousedown'];
   const tryPlay = () => {
-    playAudio();
-    // Remove listeners after first successful play
-    events.forEach(event => document.removeEventListener(event, tryPlay));
+    if(!audioStarted){
+      playAudio();
+      if(audioStarted){
+        // Remove all listeners after successful play
+        events.forEach(event => document.removeEventListener(event, tryPlay));
+      }
+    }
   };
-  events.forEach(event => document.addEventListener(event, tryPlay, { once: true }));
+  events.forEach(event => document.addEventListener(event, tryPlay, { passive: true }));
 
   // Download invite placeholder
   document.getElementById('downloadInvite').addEventListener('click', ()=>{
