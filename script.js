@@ -307,6 +307,11 @@
   const musicToggle = document.getElementById('musicToggle');
   let isPlaying = true;
   
+  // Set initial state to show playing icon
+  if(musicToggle){
+    musicToggle.classList.add('playing');
+  }
+  
   if(musicToggle && audio){
     musicToggle.addEventListener('click', () => {
       if(isPlaying){
