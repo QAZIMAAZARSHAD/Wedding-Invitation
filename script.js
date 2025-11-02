@@ -176,7 +176,7 @@
 
   // Download invite placeholder
   document.getElementById('downloadInvite').addEventListener('click', ()=>{
-    const url = 'assets/invite.pdf';
+    const url = 'assets/Invite.pdf';
     const a = document.createElement('a'); a.href = url; a.download = 'Lubna_Ahmad_Invitation.pdf'; document.body.appendChild(a); a.click(); a.remove();
   });
 
