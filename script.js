@@ -144,22 +144,40 @@
   }
   draw();
 
-  // autoplay background music (try; may be blocked by browser policies)
+  // Aggressive autoplay background music
   const audio = document.getElementById('bgMusic');
-  if(audio){
-    audio.volume = 0.16;
-    const p = audio.play();
-    if(p !== undefined){
-      p.catch(()=>{ /* autoplay blocked; fine */ });
+  
+  function playAudio(){
+    if(audio && audio.paused){
+      audio.volume = 0.16;
+      audio.play().then(()=>{
+        console.log('Audio playing automatically');
+      }).catch((error)=>{
+        console.log('Autoplay blocked, waiting for user interaction:', error);
+      });
     }
   }
-  // clicking anywhere attempts to start audio as fallback
-  document.body.addEventListener('click', ()=>{ try{ audio && audio.play(); }catch(e){} });
+  
+  // Try to play immediately
+  playAudio();
+  
+  // Try again after a short delay
+  setTimeout(playAudio, 100);
+  setTimeout(playAudio, 500);
+  
+  // Try on any user interaction
+  const events = ['click', 'touchstart', 'keydown', 'scroll', 'mousemove'];
+  const tryPlay = () => {
+    playAudio();
+    // Remove listeners after first successful play
+    events.forEach(event => document.removeEventListener(event, tryPlay));
+  };
+  events.forEach(event => document.addEventListener(event, tryPlay, { once: true }));
 
   // Download invite placeholder
   document.getElementById('downloadInvite').addEventListener('click', ()=>{
-    const url = 'assets/INVITE_FINAL.png';
-    const a = document.createElement('a'); a.href = url; a.download = 'Lubna_Ahmad_Invitation.png'; document.body.appendChild(a); a.click(); a.remove();
+    const url = 'assets/invite.pdf';
+    const a = document.createElement('a'); a.href = url; a.download = 'Lubna_Ahmad_Invitation.pdf'; document.body.appendChild(a); a.click(); a.remove();
   });
 
   // WhatsApp share
