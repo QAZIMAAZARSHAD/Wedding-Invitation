@@ -1,6 +1,6 @@
 (function(){
-  // Countdown to Jan 3 2026 18:00 local time
-  const target = new Date('2026-01-03T18:00:00');
+  // Countdown to Jan 3 2026 19:00 local time
+  const target = new Date('2026-01-03T19:00:00');
   const daysEl = document.getElementById('days');
   const hoursEl = document.getElementById('hours');
   const minsEl = document.getElementById('minutes');
@@ -198,7 +198,7 @@
 
   // WhatsApp share
   document.getElementById('shareWhatsApp').addEventListener('click', ()=>{
-    const text = encodeURIComponent('You are invited 🎉\nLubna Khalid Weds Ahmad Syedain\n3rd Jan 2026 • 6:00 PM\nHotel Awadh International, Lucknow\nDetails: ' + ('https://tinyurl.com/LubnaWedsAhmad'));
+    const text = encodeURIComponent('You are invited 🎉\nLubna Khalid Weds Ahmad Syedain\n3rd Jan 2026 • 7:00 PM\nHotel Awadh International, Lucknow\nDetails: ' + ('https://tinyurl.com/LubnaWedsAhmad'));
     const wa = 'https://wa.me/?text=' + text;
     window.open(wa,'_blank');
   });
