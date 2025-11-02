@@ -208,4 +208,158 @@
     const a = document.createElement('a'); a.href = url; a.download = 'Lubna_Ahmad_Wedding.ics'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
   });
 
+  // ========== VISUAL ENHANCEMENTS ==========
+
+  // 1. 3D Card Tilt Effect on Mouse Move
+  const card = document.getElementById('card');
+  if(card){
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -10;
+      const rotateY = ((x - centerX) / centerX) * 10;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+  }
+
+  // 2. Cursor Trail Effect (hearts and sparkles)
+  const cursorTrail = [];
+  const maxTrail = 15;
+  document.addEventListener('mousemove', (e) => {
+    if(Math.random() > 0.7) return; // Don't create on every move
+    
+    const trail = document.createElement('div');
+    trail.className = 'cursor-trail';
+    trail.style.left = e.pageX + 'px';
+    trail.style.top = e.pageY + 'px';
+    trail.innerHTML = Math.random() > 0.5 ? '❤' : '✨';
+    document.body.appendChild(trail);
+    
+    cursorTrail.push(trail);
+    if(cursorTrail.length > maxTrail){
+      const old = cursorTrail.shift();
+      old && old.remove();
+    }
+    
+    setTimeout(() => trail.remove(), 1000);
+  });
+
+  // 3. Sparkle Effect on Names Hover
+  const scriptElements = document.querySelectorAll('.script');
+  scriptElements.forEach(script => {
+    script.addEventListener('mouseenter', () => {
+      for(let i = 0; i < 8; i++){
+        setTimeout(() => {
+          const sparkle = document.createElement('span');
+          sparkle.className = 'sparkle';
+          sparkle.style.left = (Math.random() * 100) + '%';
+          sparkle.style.top = (Math.random() * 100) + '%';
+          sparkle.innerHTML = '✨';
+          script.style.position = 'relative';
+          script.appendChild(sparkle);
+          setTimeout(() => sparkle.remove(), 1000);
+        }, i * 100);
+      }
+    });
+  });
+
+  // 4. Typewriter Effect for Names
+  function typeWriter(element, text, speed = 100){
+    let i = 0;
+    element.textContent = '';
+    element.style.opacity = '1';
+    function type(){
+      if(i < text.length){
+        element.textContent += text.charAt(i);
+        i++;
+        setTimeout(type, speed);
+      }
+    }
+    type();
+  }
+
+  // Apply typewriter effect on page load
+  window.addEventListener('load', () => {
+    const scripts = document.querySelectorAll('.script');
+    if(scripts.length >= 2){
+      const lubna = scripts[0];
+      const ahmad = scripts[1];
+      const lubnaText = lubna.textContent;
+      const ahmadText = ahmad.textContent;
+      
+      lubna.style.opacity = '0';
+      ahmad.style.opacity = '0';
+      
+      setTimeout(() => typeWriter(lubna, lubnaText, 80), 500);
+      setTimeout(() => typeWriter(ahmad, ahmadText, 80), 1800);
+    }
+  });
+
+  // ========== ADDITIONAL ENHANCEMENTS ==========
+
+  // 5. Music Control Button
+  const musicToggle = document.getElementById('musicToggle');
+  let isPlaying = true;
+  
+  if(musicToggle && audio){
+    musicToggle.addEventListener('click', () => {
+      if(isPlaying){
+        audio.pause();
+        musicToggle.classList.remove('playing');
+        musicToggle.classList.add('paused');
+      } else {
+        audio.play();
+        musicToggle.classList.remove('paused');
+        musicToggle.classList.add('playing');
+      }
+      isPlaying = !isPlaying;
+    });
+  }
+
+  // 6. Scroll Progress Indicator
+  window.addEventListener('scroll', () => {
+    const scrollProgress = document.querySelector('.scroll-progress');
+    if(scrollProgress){
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (window.scrollY / docHeight) * 100;
+      scrollProgress.style.width = scrolled + '%';
+    }
+  });
+
+  // 7. Parallax Effect for Florals
+  const florals = document.querySelectorAll('.floral');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    florals.forEach((floral, index) => {
+      const speed = 0.3 + (index * 0.1);
+      floral.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+  });
+
+  // 8. Page Load Animation
+  document.body.style.opacity = '0';
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.body.style.transition = 'opacity 1s ease-in';
+      document.body.style.opacity = '1';
+    }, 100);
+  });
+
+  // 9. Interactive Countdown Hover Effects
+  const timeValues = document.querySelectorAll('.countdown .time-value');
+  timeValues.forEach(value => {
+    value.addEventListener('mouseenter', () => {
+      value.style.animation = 'none';
+      setTimeout(() => {
+        value.style.animation = 'countdownPop 0.5s ease-out';
+      }, 10);
+    });
+  });
+
 })(); 
